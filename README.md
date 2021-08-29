@@ -10,7 +10,7 @@ By default, the duration information will be only set if the command took at
 least 2 seconds to execute. The threshold value, in seconds, can be customized
 with:
 
-    zstyle ':zim:duration-info' threshold 0.5
+    zstyle ':zim:duration-info' threshold <threshold value>
 
 The threshold value can be a decimal number. If the threshold value is less than
 1, then milliseconds are automatically shown.
@@ -40,6 +40,7 @@ Here's an example:
 ```zsh
 setopt nopromptbang prompt{cr,percent,sp,subst}
 
+zstyle ':zim:duration-info' threshold 0.5
 zstyle ':zim:duration-info' format '(%d) '
 
 autoload -Uz add-zsh-hook
