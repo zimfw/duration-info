@@ -1,4 +1,6 @@
 # vim:et sts=2 sw=2 ft=zsh
+builtin emulate -L zsh
+
 local duration_format
 zstyle -s ':zim:duration-info' format 'duration_format' || return 1
 if (( __DURATION_INFO_PREEXEC_REALTIME )); then
@@ -18,14 +20,14 @@ if (( __DURATION_INFO_PREEXEC_REALTIME )); then
       duration=${m}m${s}s
     elif (( threshold_realtime < 1 )) || zstyle -t ':zim:duration-info' show-milliseconds; then
       if (( duration_realtime >= 1 )); then
-        printf -v duration '%.3fs' ${duration_realtime}
+        printf -v duration %.3fs ${duration_realtime}
       else
-        printf -v duration '%.0fms' $(( duration_realtime*1000 ))
+        printf -v duration %.0fms $(( duration_realtime*1000 ))
       fi
     else
       duration=${duration_seconds}s
     fi
-    zformat -f duration_info ${duration_format} "d:${duration}"
+    zformat -f duration_info ${duration_format} d:${duration}
   else
     # Don't show duration
     unset duration_info
